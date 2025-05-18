@@ -1,4 +1,4 @@
-package xmind
+package goxmind
 
 import (
 	"math/rand"
