@@ -1,9 +1,11 @@
 package main
 
+import "github.com/vivian0517/goxmind"
+
 func example2() {
 
 	//初始化
-	xmind := x.NewXmind()
+	xmind := goxmind.NewXmind()
 	//添加画布名称和根节点名称
 	rootNode := xmind.AddSheet("画布名称", "根节点名称")
 
