@@ -48,7 +48,7 @@ func convertNodeToTopic(node *Node) Topic {
 		Id:    RandStringRunes(26),
 	}
 
-	// 设置标记
+	// 设置图标
 	if len(node.Makers) > 0 {
 		topic.MakerRefs = &MakerRefs{
 			MakerRef: make([]MakerRef, len(node.Makers)),
