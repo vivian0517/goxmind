@@ -12,12 +12,6 @@ import (
 	"strings"
 )
 
-func createMeta() *Meta {
-	return &Meta{
-		Author: "vivian",
-	}
-}
-
 func createManifest() *Manifest {
 	return &Manifest{
 		PasswordHint: "",
@@ -163,7 +157,7 @@ func prasejsoncontent(data []byte) (*Content, error) {
 		log.Fatalf("解析 json 出错: %v", err)
 		return nil, err
 	}
-	log.Println("解析 json: %v", newJson)
+	log.Println("解析 json:", newJson)
 	content := convertNewJsonToXmind(newJson)
 
 	return content, nil

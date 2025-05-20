@@ -2,7 +2,6 @@ package goxmind
 
 import (
 	"errors"
-	"strconv"
 )
 
 type Xmind struct {
@@ -143,36 +142,20 @@ func (n *Node) UpdateTopic(str string) {
 	n.NodeTitle = str
 }
 
-type ProrityLevel int
-
-const (
-	ProrityOne   ProrityLevel = 1
-	ProrityTwo   ProrityLevel = 2
-	ProrityThree ProrityLevel = 3
-	ProrityFour  ProrityLevel = 4
-	ProrityFive  ProrityLevel = 5
-	ProritySix   ProrityLevel = 6
-	ProritySeven ProrityLevel = 7
-	ProrityEight ProrityLevel = 8
-	ProrityNine  ProrityLevel = 9
-)
-
 // 设置图标
-func (x *Xmind) AddMaker(node *Node, maker ProrityLevel) {
-	prostr := "priority-" + strconv.Itoa(int(maker))
-	makerval := Makers{
-		Maker: prostr,
+func (x *Xmind) AddMarker(node *Node, marker MarkerId) {
+	markerVal := Makers{
+		Maker: string(marker),
 	}
-	node.Makers = append(node.Makers, makerval)
+	node.Makers = append(node.Makers, markerVal)
 }
 
 // 设置图标
-func (n *Node) AddMaker(maker ProrityLevel) {
-	prostr := "priority-" + strconv.Itoa(int(maker))
-	makerval := Makers{
-		Maker: prostr,
+func (n *Node) AddMaker(marker MarkerId) {
+	markerVal := Makers{
+		Maker: string(marker),
 	}
-	n.Makers = append(n.Makers, makerval)
+	n.Makers = append(n.Makers, markerVal)
 }
 
 // 设置备注
