@@ -26,7 +26,7 @@ type Makers struct {
 	Maker string `json:"maker"`
 }
 
-func NewXmind() *Xmind {
+func New() *Xmind {
 
 	return &Xmind{}
 }
