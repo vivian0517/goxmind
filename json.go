@@ -49,7 +49,7 @@ func (x *Xmind) AddSheet(sheetTitle string, rootTitle string) *Node {
 }
 
 // 添加xmind的一个新子节点，传参父节点指针，要添加的子节点名称，返回新添加的节点指针
-func (x *Xmind) AddTopic(node *Node, str string) *Node {
+func (x *Xmind) AddNode(node *Node, str string) *Node {
 	child := &Node{
 		NodeTitle: str,
 	}
@@ -58,7 +58,7 @@ func (x *Xmind) AddTopic(node *Node, str string) *Node {
 }
 
 // 通过node 添加一个新的子节点，传参要添加的子节点名称，返回新添加的节点指针
-func (n *Node) AddTopic(str string) *Node {
+func (n *Node) AddNode(str string) *Node {
 	child := &Node{
 		NodeTitle: str,
 	}
@@ -67,7 +67,7 @@ func (n *Node) AddTopic(str string) *Node {
 }
 
 // 在node!之前!添加一个新的节点，传参要添加的节点名称，返回新添加的节点指针
-func (x *Xmind) AddTopicBefore(node *Node, str string) (*Node, error) {
+func (x *Xmind) AddNodeBefore(node *Node, str string) (*Node, error) {
 	if node == nil {
 		return nil, errors.New("node is nil")
 	}
@@ -133,12 +133,12 @@ func (x *Xmind) DeleteNode(node *Node) error {
 }
 
 // 更新xmind的一个节点名字，传节点指针，要更新的Title
-func (x *Xmind) UpdateTopic(node *Node, str string) {
+func (x *Xmind) UpdateNode(node *Node, str string) {
 	node.NodeTitle = str
 }
 
 // 更新xmind的一个节点名字，传节点指针，要更新的Title
-func (n *Node) UpdateTopic(str string) {
+func (n *Node) UpdateNode(str string) {
 	n.NodeTitle = str
 }
 
