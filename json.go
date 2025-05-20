@@ -31,12 +31,14 @@ func New() *Xmind {
 	return &Xmind{}
 }
 
-// 修改文件名
+// SetFileName modifies the filename.
 func (x *Xmind) SetFileName(filename string) {
 	x.FileName = filename
 }
 
-// 添加xmind的一个新画布和根节点，传参画布名称，根节点名称，返回根节点指针
+// AddSheet adds a new sheet and root node to the xmind,
+// takes the sheet name and root node name as parameters,
+// and returns a pointer to the root node.
 func (x *Xmind) AddSheet(sheetTitle string, rootTitle string) *Node {
 	canva := &Sheet{
 		SheetTitle: sheetTitle,
@@ -48,7 +50,9 @@ func (x *Xmind) AddSheet(sheetTitle string, rootTitle string) *Node {
 	return &x.Canvas[len(x.Canvas)-1].Node
 }
 
-// 添加xmind的一个新子节点，传参父节点指针，要添加的子节点名称，返回新添加的节点指针
+// AddNode adds a new child node to the xmind,
+// takes a pointer to the parent node and the name of the child node to be added as parameters,
+// and returns a pointer to the newly added node.
 func (x *Xmind) AddNode(node *Node, str string) *Node {
 	child := &Node{
 		NodeTitle: str,
@@ -57,7 +61,7 @@ func (x *Xmind) AddNode(node *Node, str string) *Node {
 	return node.Children[len(node.Children)-1]
 }
 
-// 通过node 添加一个新的子节点，传参要添加的子节点名称，返回新添加的节点指针
+// AddNode adds a new child node to the xmind,
 func (n *Node) AddNode(str string) *Node {
 	child := &Node{
 		NodeTitle: str,
@@ -66,7 +70,7 @@ func (n *Node) AddNode(str string) *Node {
 	return n.Children[len(n.Children)-1]
 }
 
-// 在node!之前!添加一个新的节点，传参要添加的节点名称，返回新添加的节点指针
+// In node! before! adding a new node,
 func (x *Xmind) AddNodeBefore(node *Node, str string) (*Node, error) {
 	if node == nil {
 		return nil, errors.New("node is nil")
@@ -75,7 +79,7 @@ func (x *Xmind) AddNodeBefore(node *Node, str string) (*Node, error) {
 	for _, sheet := range x.Canvas {
 		parent := FindParent(&sheet.Node, node)
 		if parent != nil {
-			// 在 parent.Children 中找到 node 并替换为新 parent 节点
+			// In parent.Children find node and replace it with new parent node
 			newParent := &Node{
 				NodeTitle: str,
 				Children:  []*Node{node},
@@ -115,7 +119,7 @@ func (x *Xmind) DeleteNode(node *Node) error {
 	for _, sheet := range x.Canvas {
 		parent := FindParent(&sheet.Node, node)
 		if parent != nil {
-			// 在 parent.Children 中找到 node 并删除
+			// In parent.Children find node and delete
 			newChildren := []*Node{}
 			for _, child := range parent.Children {
 				if child != node {
@@ -132,17 +136,17 @@ func (x *Xmind) DeleteNode(node *Node) error {
 	return nil
 }
 
-// 更新xmind的一个节点名字，传节点指针，要更新的Title
+// Update xmind one node name, pass node pointer, to update the Title
 func (x *Xmind) UpdateNode(node *Node, str string) {
 	node.NodeTitle = str
 }
 
-// 更新xmind的一个节点名字，传节点指针，要更新的Title
+// Update xmind one node name, pass node pointer, to update the Title
 func (n *Node) UpdateNode(str string) {
 	n.NodeTitle = str
 }
 
-// 设置图标
+// Set icon
 func (x *Xmind) AddMarker(node *Node, marker MarkerId) {
 	markerVal := Makers{
 		Maker: string(marker),
@@ -150,7 +154,7 @@ func (x *Xmind) AddMarker(node *Node, marker MarkerId) {
 	node.Makers = append(node.Makers, markerVal)
 }
 
-// 设置图标
+// Set icon
 func (n *Node) AddMaker(marker MarkerId) {
 	markerVal := Makers{
 		Maker: string(marker),
@@ -158,22 +162,22 @@ func (n *Node) AddMaker(marker MarkerId) {
 	n.Makers = append(n.Makers, markerVal)
 }
 
-// 设置备注
+// Set note
 func (x *Xmind) AddNotes(node *Node, notes string) {
 	node.Notes = notes
 }
 
-// 设置备注
+// Set note
 func (n *Node) AddNotes(notes string) {
 	n.Notes = notes
 }
 
-// 设置超链接
+// Set href
 func (x *Xmind) AddHref(node *Node, href string) {
 	node.Href = href
 }
 
-// 设置超链接
+// Set href
 func (n *Node) AddHref(href string) {
 	n.Href = href
 }

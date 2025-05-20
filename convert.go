@@ -1,3 +1,4 @@
+// Package goxmind provides functionality for working with XMind files.
 package goxmind
 
 import (
@@ -6,6 +7,7 @@ import (
 	"time"
 )
 
+// contentInit initializes a new Content struct with default values.
 func contentInit() *Content {
 	return &Content{
 		Modified:   "vivian",
@@ -17,6 +19,7 @@ func contentInit() *Content {
 	}
 }
 
+// MarshalContent marshals an Xmind struct into a Content struct.
 func MarshalContent(xmind *Xmind) *Content {
 	content := contentInit()
 	for i := 0; i < len(xmind.Canvas); i++ {
@@ -30,11 +33,12 @@ func MarshalContent(xmind *Xmind) *Content {
 	return content
 }
 
+// lettersAndDigits is a constant string containing all possible characters for random string generation.
 const lettersAndDigits = "abcdefghijklmnopqrstuvwxyz0123456789"
 
-// RandStringRunes 生成指定长度的随机字符串
+// RandStringRunes generates a random string of the specified length.
 func RandStringRunes(n int) string {
-	rand.New(rand.NewSource(time.Now().UnixNano())) // 使用当前时间作为种子
+	rand.New(rand.NewSource(time.Now().UnixNano())) // Use the current time as the seed
 	var sb strings.Builder
 	for i := 0; i < n; i++ {
 		sb.WriteByte(lettersAndDigits[rand.Intn(len(lettersAndDigits))])
@@ -42,13 +46,14 @@ func RandStringRunes(n int) string {
 	return sb.String()
 }
 
+// convertNodeToTopic converts a Node struct to a Topic struct.
 func convertNodeToTopic(node *Node) Topic {
 	topic := Topic{
 		Title: node.NodeTitle,
 		Id:    RandStringRunes(26),
 	}
 
-	// 设置图标
+	// Set icons
 	if len(node.Makers) > 0 {
 		topic.MakerRefs = &MakerRefs{
 			MakerRef: make([]MakerRef, len(node.Makers)),
@@ -58,14 +63,13 @@ func convertNodeToTopic(node *Node) Topic {
 		}
 	}
 
-	//设置备注
+	// Set notes
 	if node.Notes != "" {
 		topic.Notes = &Note{}
-
 		topic.Notes.Plain = node.Notes
 	}
 
-	//设置超链接
+	// Set hyperlink
 	if node.Href != "" {
 		topic.Href = node.Href
 	}

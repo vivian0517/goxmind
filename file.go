@@ -26,7 +26,7 @@ func createManifest() *Manifest {
 	}
 }
 
-// 保存xmind文件，传参文件名
+// Save saves the xmind file, pass in the filename as a parameter
 func (xmind *Xmind) Save(filename string) error {
 	if strings.HasSuffix(filename, ".xmind") {
 		xmind.FileName = filename
@@ -75,7 +75,8 @@ func (xmind *Xmind) Save(filename string) error {
 	if err != nil {
 		return err
 	}
-	p := "生成的xmind保存在" + path + string(os.PathSeparator) + xmind.FileName
+	// The generated xmind is saved in
+	p := "The generated xmind is saved in " + path + string(os.PathSeparator) + xmind.FileName
 	fmt.Println(p)
 	return nil
 }
@@ -119,6 +120,7 @@ func Load(filename string) (*Xmind, error) {
 			if err != nil {
 				return nil, err
 			}
+			// This file can not be opened normally, please do not modify and save, otherwise the contents will be permanently lost！
 			if strings.Contains(string(xmlcontent), "This file can not be opened normally, please do not modify and save, otherwise the contents will be permanently lost！") {
 				continue
 			}
@@ -129,7 +131,8 @@ func Load(filename string) (*Xmind, error) {
 	case jsoncontent != nil:
 		content, err = prasejsoncontent(jsoncontent)
 		if err != nil {
-			log.Fatalf("解析 json 出错: %v", err)
+			// Error parsing json
+			log.Fatalf("Error parsing json: %v", err)
 			return nil, err
 		}
 		xmind = UnmarshalContent(content)
@@ -138,7 +141,8 @@ func Load(filename string) (*Xmind, error) {
 	case xmlcontent != nil:
 		content, err = prasexmlcontent(xmlcontent)
 		if err != nil {
-			log.Fatalf("解析 XML 出错: %v", err)
+			// Error parsing XML
+			log.Fatalf("Error parsing XML: %v", err)
 			return nil, err
 		}
 		xmind = UnmarshalContent(content)
@@ -147,17 +151,18 @@ func Load(filename string) (*Xmind, error) {
 	default:
 		return nil, errors.New("not found content file, invalid xmind")
 	}
-
 }
 
 func prasejsoncontent(data []byte) (*Content, error) {
 	newJson := &NewJson{}
 	err := json.Unmarshal(data, newJson)
 	if err != nil {
-		log.Fatalf("解析 json 出错: %v", err)
+		// Error parsing json
+		log.Fatalf("Error parsing json: %v", err)
 		return nil, err
 	}
-	log.Println("解析 json:", newJson)
+	// Parsing json
+	log.Println("Parsing json:", newJson)
 	content := convertNewJsonToXmind(newJson)
 
 	return content, nil
@@ -166,7 +171,8 @@ func prasexmlcontent(data []byte) (*Content, error) {
 	content := &Content{}
 	err := xml.Unmarshal(data, content)
 	if err != nil {
-		log.Fatalf("解析 XML 出错: %v", err)
+		// Error parsing XML
+		log.Fatalf("Error parsing XML: %v", err)
 		return nil, err
 	}
 	return content, nil
@@ -189,7 +195,7 @@ func convertTopicToNode(topic *Topic) Node {
 		NodeTitle: topic.Title,
 	}
 
-	// 提取图标（marker-id）
+	// Extract icons (marker-id)
 	if topic.MakerRefs != nil && len(topic.MakerRefs.MakerRef) > 0 {
 		node.Makers = make([]Makers, len(topic.MakerRefs.MakerRef))
 		for i, makerRef := range topic.MakerRefs.MakerRef {
@@ -197,24 +203,23 @@ func convertTopicToNode(topic *Topic) Node {
 		}
 	}
 
-	// 提取备注
+	// Extract notes
 	if topic.Notes != nil {
 		node.Notes = topic.Notes.Plain
 	}
 
-	// 提取超链接
+	// Extract hyperlink
 	if topic.Href != "" {
 		node.Href = topic.Href
 	}
 
-	// 递归处理子节点
+	// Recursively process child nodes
 	if topic.Children != nil && topic.Children.Topics.Type == "attached" {
 		for _, childTopic := range topic.Children.Topics.Topic {
 			childNode := convertTopicToNode(&childTopic)
 			node.Children = append(node.Children, &childNode)
 		}
 	}
-
 	return node
 }
 
@@ -224,6 +229,17 @@ func (x *Xmind) PrintJson() {
 		log.Fatal(err)
 	}
 	fmt.Println(string(jsonBytes))
+}
+func (x *Xmind) SaveJson(filename string) {
+	jsonBytes, err := json.MarshalIndent(x, "", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = os.WriteFile(filename, jsonBytes, 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("save ", filename, " success")
 }
 
 func PraseJsonSaveXmind(filename string) {
@@ -241,25 +257,25 @@ func convertNewJsonToXmind(newJson *NewJson) *Content {
 		return nil
 	}
 
-	// 创建 Content 结构
+	// Create Content struct
 	content := contentInit()
 
-	// 处理每个思维导图
+	// Process each mind map
 	for _, mindMap := range *newJson {
-		// 创建新的工作表
+		// Create a new sheet
 		sheet := &XMLSheet{
 			Title: mindMap.Title,
 			Id:    mindMap.ID,
 		}
 
-		// 处理根主题
+		// Process root topic
 		rootTopic := mindMap.RootTopic
 		sheetTopic := Topic{
 			Id:             rootTopic.ID,
 			Title:          rootTopic.Title,
 			Structureclass: rootTopic.StructureClass,
 		}
-		//处理标记
+		// Process markers
 		if len(rootTopic.Markers) > 0 {
 			var makerref []MakerRef
 			for i := 0; i < len(rootTopic.Markers); i++ {
@@ -269,7 +285,7 @@ func convertNewJsonToXmind(newJson *NewJson) *Content {
 			sheetTopic.MakerRefs.MakerRef = makerref
 		}
 
-		// 处理子主题
+		// Process child topics
 		if len(rootTopic.Childrennew.Attached) > 0 {
 			children := &Children{
 				Topics: Topics{
