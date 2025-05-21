@@ -1,4 +1,6 @@
 # goxmind
+Read this document in other languages:
+- [简体中文 (Chinese)](README_zh.md)
 
 `goxmind` is a library written in Go, designed for creating, manipulating, and saving mind map files in the XMind format. It simplifies the process of constructing mind map structures and saving them as standard XMind files.
 
@@ -60,6 +62,50 @@ Save the above code as `main.go`, then run the following command in the terminal
 ```bash
 go run main.go
 ```
+### Result
+After running the example, you will find a file named `xmind_file_name.xmind` in the same directory. This file is the generated XMind file.
+![generated XMind](./example/1.png)
+
+## Features
+```go
+package main
+
+import "github.com/vivian0517/goxmind"
+
+func main() {
+	// Initialize
+	xmind := goxmind.New()
+	// Add sheet title and root node title
+	rootNode := xmind.AddSheet("Sheet title", "Root Node title")
+
+	// Add child node title
+	child1 := rootNode.AddNode("Child 1") // If you want to add icons, hyperlinks, etc. to this node, you need to save the return value
+	// Set hyperlink for child1 node
+	child1.AddHref("www.example.com")
+
+	child2 := rootNode.AddNode("Child 2")
+	// Set notes for child2 node
+	child2.AddNotes("Notes")
+
+	child3 := rootNode.AddNode("Child 3")
+	// Set icon for child3 node 🔢 Priority
+	child3.AddMaker(goxmind.Priority1)
+	child3.AddMaker(goxmind.Priority2)
+
+	child4 := rootNode.AddNode("Child 4")
+	// Set icon for child4 node ⭐ Star
+	child4.AddMaker(goxmind.StarRed)
+	// Set icon for child4 node 😊 Smiley
+	child4.AddMaker(goxmind.SmileySmile)
+	// Set icon for child4 node ✅ Task Progress
+	child4.AddMaker(goxmind.Task0_8)
+	// For more icons, refer to the MarkerId constant in marker.go
+
+	// Save xmind, the ".xmind" file suffix is optional
+	xmind.Save("xmind_file_name")
+}
+```
+![generated XMind](./example/2.png)
 
 ## Contribution Guide
 If you wish to contribute to the `goxmind` project, please follow these steps:
@@ -75,8 +121,6 @@ This project is licensed under the [MIT License](LICENSE).
 ## Contact
 If you have any questions or suggestions, please submit an issue in the GitHub repository.
 ---
-Read this document in other languages:
-- [简体中文 (Chinese)](README_zh.md)
-```
+
 
         

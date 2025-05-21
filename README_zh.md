@@ -77,5 +77,3 @@ go run main.go
 
 ## 联系方式
 如果你有任何问题或建议，请在 GitHub 仓库中提交 issue。 
-```
-

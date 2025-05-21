@@ -4,29 +4,29 @@ import "github.com/vivian0517/goxmind"
 
 func example1() {
 
-	//初始化
+	// Initialize
 	xmind := goxmind.New()
-	//添加画布名称和根节点名称
-	rootNode := xmind.AddSheet("画布名称", "根节点名称")
+	// Add sheet title and root node title
+	rootNode := xmind.AddSheet("Sheet title", "Root Node title")
 
-	//添加子节点名称
-	child1 := rootNode.AddNode("Child 1") //如果要在此节点下继续添加节点需要保存返回值
-	rootNode.AddNode("Child 2")           //如果不在此节点下继续添加节点，可以忽略返回值
+	// Add child node title
+	child1 := rootNode.AddNode("Child 1") // If you want to add more nodes under this node, you need to save the return value
+	rootNode.AddNode("Child 2")           // If you don't want to add more nodes under this node, you can ignore the return value
 	rootNode.AddNode("Child 3")
 	rootNode.AddNode("Child 4")
 
-	//在child1节点下继续添加子节点
-	child1_1 := child1.AddNode("Child 1.1") //如果要在此节点下继续添加节点需要保存返回值
+	// Continue adding child nodes under the child1 node
+	child1_1 := child1.AddNode("Child 1.1") // If you want to add more nodes under this node, you need to save the return value
 	child1_2 := child1.AddNode("Child 1.2")
-	child1.AddNode("Child 1.3") //如果不在此节点下继续添加节点，可以忽略返回值
+	child1.AddNode("Child 1.3") // If you don't want to add more nodes under this node, you can ignore the return value
 
-	//在child1.1节点下继续添加子节点
+	// Continue adding child nodes under the child1.1 node
 	child1_1.AddNode("Child 1.1.1")
 	child1_1.AddNode("Child 1.1.2")
 	child1_2.AddNode("Child 1.2.1")
 	child1_2.AddNode("Child 1.2.2")
 
-	//保存xmind,".xmind"文件后缀可填也可不填
-	xmind.Save("xmind文件名")
+	// Save xmind, the ".xmind" file suffix is optional
+	xmind.Save("xmind_file_name")
 
 }
