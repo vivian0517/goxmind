@@ -11,19 +11,19 @@ type Xmind struct {
 
 type Sheet struct {
 	SheetTitle string `json:"sheetTitle"`
-	Node       Node   `json:"node"`
+	Node       Node   `json:"node,omitempty"`
 }
 
 type Node struct {
 	NodeTitle string   `json:"nodeTitle"`
-	Children  []*Node  `json:"children"`
-	Makers    []Makers `json:"makers"`
-	Notes     string   `json:"notes"`
-	Href      string   `json:"href"`
+	Children  []*Node  `json:"children,omitempty"`
+	Makers    []Makers `json:"makers,omitempty"`
+	Notes     string   `json:"notes,omitempty"`
+	Href      string   `json:"href,omitempty"`
 }
 
 type Makers struct {
-	Maker string `json:"maker"`
+	Maker string `json:"maker,omitempty"`
 }
 
 func New() *Xmind {

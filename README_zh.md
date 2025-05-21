@@ -30,30 +30,36 @@ package main
 import "github.com/vivian0517/goxmind"
 
 func main() {
-	//初始化
-	xmind := goxmind.NewXmind()
-	//添加画布名称和根节点名称
-	rootNode := xmind.AddSheet("画布名称", "根节点名称")
+	// 初始化
+	xmind := goxmind.New()
+	// 添加画布标题和根节点标题
+	rootNode := xmind.AddSheet("Sheet title", "Root Node title")
 
-	//添加子节点名称
-	child1 := rootNode.AddTopic("Child 1") //如果要在此节点下继续添加节点需要保存返回值
-	rootNode.AddTopic("Child 2")           //如果不在此节点下继续添加节点，可以忽略返回值
-	rootNode.AddTopic("Child 3")
-	rootNode.AddTopic("Child 4")
+	// 添加子节点标题
+	child1 := rootNode.AddNode("Child 1") // 如果要在此节点增加图标超链接等需要保存返回值
+	// 给child1节点设置超链接
+	child1.AddHref("www.example.com")
 
-	//在child1节点下继续添加子节点
-	child1_1 := child1.AddTopic("Child 1.1") //如果要在此节点下继续添加节点需要保存返回值
-	child1_2 := child1.AddTopic("Child 1.2")
-	child1.AddTopic("Child 1.3") //如果不在此节点下继续添加节点，可以忽略返回值
+	child2 := rootNode.AddNode("Child 2")
+	// 给child2节点设置备注
+	child2.AddNotes("Notes")
 
-	//在child1.1节点下继续添加子节点
-	child1_1.AddTopic("Child 1.1.1")
-	child1_1.AddTopic("Child 1.1.2")
-	child1_2.AddTopic("Child 1.2.1")
-	child1_2.AddTopic("Child 1.2.2")
+	child3 := rootNode.AddNode("Child 3")
+	// 给child3节点设置图标 🔢 优先级
+	child3.AddMaker(goxmind.Priority1)
+	child3.AddMaker(goxmind.Priority2)
 
-	//保存xmind,".xmind"文件后缀可填也可不填
-	xmind.Save("xmind文件名")
+	child4 := rootNode.AddNode("Child 4")
+	// 给child4节点设置图标 ⭐ 星星
+	child4.AddMaker(goxmind.StarRed)
+	// 给child4节点设置图标 😊 表情
+	child4.AddMaker(goxmind.SmileySmile)
+	// 给child4节点设置图标 ✅ 任务进度
+	child4.AddMaker(goxmind.Task0_8)
+	// 更多图标参考marker.go中MarkerId常量
+
+	// 保存xmind,".xmind"文件后缀可填也可不填
+	xmind.Save("xmind_file_name")
 }
 
 ```
@@ -62,6 +68,141 @@ func main() {
 将上述代码保存为 `main.go`，然后在终端中运行：
 ```bash
 go run main.go
+```
+### 结果
+运行示例后，您会在同一目录下找到一个名为 xmind_file_name.xmind 的文件。这个文件就是生成的 XMind 文件。
+![生成的XMind](./example/1.png)
+
+
+## 功能特性
+1.添加备注/图标/超链接
+```go
+package main
+
+import "github.com/vivian0517/goxmind"
+
+func main() {
+	// 初始化
+	xmind := goxmind.New()
+	// 添加画布标题和根节点标题
+	rootNode := xmind.AddSheet("Sheet title", "Root Node title")
+
+	// 添加子节点标题
+	child1 := rootNode.AddNode("Child 1") // 如果要在此节点增加图标超链接等需要保存返回值
+	// 给child1节点设置超链接
+	child1.AddHref("www.example.com")
+
+	child2 := rootNode.AddNode("Child 2")
+	// 给child2节点设置备注
+	child2.AddNotes("Notes")
+
+	child3 := rootNode.AddNode("Child 3")
+	// 给child3节点设置图标 🔢 优先级
+	child3.AddMaker(goxmind.Priority1)
+	child3.AddMaker(goxmind.Priority2)
+
+	child4 := rootNode.AddNode("Child 4")
+	// 给child4节点设置图标 ⭐ 星星
+	child4.AddMaker(goxmind.StarRed)
+	// 给child4节点设置图标 😊 表情
+	child4.AddMaker(goxmind.SmileySmile)
+	// 给child4节点设置图标 ✅ 任务进度
+	child4.AddMaker(goxmind.Task0_8)
+	// 更多图标参考marker.go中MarkerId常量
+
+	// 保存xmind,".xmind"文件后缀可填也可不填
+	xmind.Save("xmind_file_name")
+}
+```
+![生成的XMind](./example/2.png)
+
+2.解析指定路径json文件，生成指定文件名xmind
+```go
+package main
+
+import "github.com/vivian0517/goxmind"
+
+func main() {
+	//在项目路径下创建一个jsondata.txt文件，PraseJsonSaveXmind可以读取txt生成指定文件名xmind，json结构示例如下
+	goxmind.PraseJsonSaveXmind("xmind_file_name")
+}
+```
+json结构示例如下
+```json
+{
+  "filename": "xmind_file_name.xmind",
+  "sheet": [
+    {
+      "sheetTitle": "Sheet title",
+      "node": {
+        "nodeTitle": "Root Node title",
+        "children": [
+          {
+            "nodeTitle": "Child 1",
+            "children": [
+              {
+                "nodeTitle": "Child 1.1",
+                "children": [
+                  {
+                    "nodeTitle": "Child 1.1.1"
+                  },
+                  {
+                    "nodeTitle": "Child 1.1.2"
+                  }
+                ]
+              },
+              {
+                "nodeTitle": "Child 1.2",
+                "children": [
+                  {
+                    "nodeTitle": "Child 1.2.1"
+                  },
+                  {
+                    "nodeTitle": "Child 1.2.2"
+                  }
+                ]
+              },
+              {
+                "nodeTitle": "Child 1.3"
+              }
+            ]
+          },
+          {
+            "nodeTitle": "Child 2"
+          },
+          {
+            "nodeTitle": "Child 3"
+          },
+          {
+            "nodeTitle": "Child 4"
+          }
+        ]
+      }
+    }
+  ]
+}
+```
+3.加载指定xmind文件，兼容新老版本,打印/保存json结构
+```go
+package main
+
+import (
+	"fmt"
+
+	"github.com/vivian0517/goxmind"
+)
+
+func main() {
+	//加载指定xmind文件，兼容新老版本
+	xmind, err := goxmind.Load("xmind_file_name")
+	if err != nil {
+		fmt.Print("err:", err)
+	}
+	//打印json结构
+	xmind.PrintJson()
+	//保存json结构
+	xmind.SaveJson("save.txt")
+}
 ```
 
 ## 贡献指南

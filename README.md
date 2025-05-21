@@ -31,28 +31,28 @@ import "github.com/vivian0517/goxmind"
 
 func main() {
 	// Initialize
-	xmind := goxmind.NewXmind()
-	// Add a sheet name and a root node name
-	rootNode := xmind.AddSheet("Sheet Name", "Root Node Name")
+	xmind := goxmind.New()
+	// Add sheet title and root node title
+	rootNode := xmind.AddSheet("Sheet title", "Root Node title")
 
-	// Add child node names
-	child1 := rootNode.AddTopic("Child 1") // Save the return value if you want to add more nodes under this node
-	rootNode.AddTopic("Child 2")           // You can ignore the return value if you don't need to add more nodes under this node
-	rootNode.AddTopic("Child 3")
-	rootNode.AddTopic("Child 4")
+	// Add child node title
+	child1 := rootNode.AddNode("Child 1") // If you want to add more nodes under this node, you need to save the return value
+	rootNode.AddNode("Child 2")           // If you don't want to add more nodes under this node, you can ignore the return value
+	rootNode.AddNode("Child 3")
+	rootNode.AddNode("Child 4")
 
-	// Add more child nodes under child1
-	child1_1 := child1.AddTopic("Child 1.1") // Save the return value if you want to add more nodes under this node
-	child1_2 := child1.AddTopic("Child 1.2")
-	child1.AddTopic("Child 1.3") // You can ignore the return value if you don't need to add more nodes under this node
+	// Continue adding child nodes under the child1 node
+	child1_1 := child1.AddNode("Child 1.1") // If you want to add more nodes under this node, you need to save the return value
+	child1_2 := child1.AddNode("Child 1.2")
+	child1.AddNode("Child 1.3") // If you don't want to add more nodes under this node, you can ignore the return value
 
-	// Add more child nodes under child1.1
-	child1_1.AddTopic("Child 1.1.1")
-	child1_1.AddTopic("Child 1.1.2")
-	child1_2.AddTopic("Child 1.2.1")
-	child1_2.AddTopic("Child 1.2.2")
+	// Continue adding child nodes under the child1.1 node
+	child1_1.AddNode("Child 1.1.1")
+	child1_1.AddNode("Child 1.1.2")
+	child1_2.AddNode("Child 1.2.1")
+	child1_2.AddNode("Child 1.2.2")
 
-	// Save the XMind file. The ".xmind" file extension is optional.
+	// Save xmind, the ".xmind" file suffix is optional
 	xmind.Save("xmind_file_name")
 }
 ```
@@ -67,6 +67,7 @@ After running the example, you will find a file named `xmind_file_name.xmind` in
 ![generated XMind](./example/1.png)
 
 ## Features
+1.add notes/add marker/add herf
 ```go
 package main
 
@@ -106,6 +107,101 @@ func main() {
 }
 ```
 ![generated XMind](./example/2.png)
+
+2.Parse the JSON file from the specified path and generate an XMind file with the specified filename
+```go
+package main
+
+import "github.com/vivian0517/goxmind"
+
+func main() {
+
+    // Create a jsondata.txt file in the project path, 
+    // PraseJsonSaveXmind can read the txt and generate an XMind file with the specified filename. 
+    // The JSON structure example is as follows:
+
+    goxmind.PraseJsonSaveXmind("xmind_file_name")
+}
+```
+JSON structure example:
+```json
+{
+  "filename": "xmind_file_name.xmind",
+  "sheet": [
+    {
+      "sheetTitle": "Sheet title",
+      "node": {
+        "nodeTitle": "Root Node title",
+        "children": [
+          {
+            "nodeTitle": "Child 1",
+            "children": [
+              {
+                "nodeTitle": "Child 1.1",
+                "children": [
+                  {
+                    "nodeTitle": "Child 1.1.1"
+                  },
+                  {
+                    "nodeTitle": "Child 1.1.2"
+                  }
+                ]
+              },
+              {
+                "nodeTitle": "Child 1.2",
+                "children": [
+                  {
+                    "nodeTitle": "Child 1.2.1"
+                  },
+                  {
+                    "nodeTitle": "Child 1.2.2"
+                  }
+                ]
+              },
+              {
+                "nodeTitle": "Child 1.3"
+              }
+            ]
+          },
+          {
+            "nodeTitle": "Child 2"
+          },
+          {
+            "nodeTitle": "Child 3"
+          },
+          {
+            "nodeTitle": "Child 4"
+          }
+        ]
+      }
+    }
+  ]
+}
+```
+3.Load the specified XMind file, compatible with new and old versions, print/save JSON structure
+```go
+package main
+
+import (
+    "fmt"
+    "github.com/vivian0517/goxmind"
+)
+
+func main() {
+
+    // Load the specified XMind file, compatible with both old and new versions
+    xmind, err := goxmind.Load("xmind_file_name")
+    if err != nil {
+        fmt.Print("err:", err)
+    }
+
+    // Print the JSON structure
+    xmind.PrintJson()
+
+    // Save the JSON structure
+    xmind.SaveJson("save.txt")
+}
+```
 
 ## Contribution Guide
 If you wish to contribute to the `goxmind` project, please follow these steps:
