@@ -190,7 +190,7 @@ func UnmarshalContent(content *Content) *Xmind {
 			SheetTitle: content.XMLSheets[i].Title,
 			Node:       convertTopicToNode(&content.XMLSheets[i].Topic),
 		}
-		xmind.Canvas = append(xmind.Canvas, canva)
+		xmind.Sheets = append(xmind.Sheets, canva)
 	}
 	return xmind
 }

@@ -182,7 +182,11 @@ json结构示例如下
   ]
 }
 ```
-3.加载指定xmind文件，兼容新老版本,打印/保存json结构
+3.加载指定xmind文件(兼容新老版本)
+打印/保存json结构
+删除某节点
+添加节点在某节点之前
+
 ```go
 package main
 
@@ -202,8 +206,14 @@ func main() {
 	xmind.PrintJson()
 	//保存json结构
 	xmind.SaveJson("save.txt")
+	//删除某个节点
+	xmind.DeleteNode(xmind.Sheets[0].Node.Children[0])
+	//添加节点在某个节点之前
+	xmind.AddNodeBefore(xmind.Sheets[0].Node.Children[0], "new node before")
+	xmind.Save("filename")
 }
 ```
+![修改后的XMind](./example/3.png)
 
 ## 贡献指南
 如果你希望为 `goxmind` 项目做出贡献，请遵循以下步骤：

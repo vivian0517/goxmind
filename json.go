@@ -6,7 +6,7 @@ import (
 
 type Xmind struct {
 	FileName string   `json:"filename"`
-	Canvas   []*Sheet `json:"sheet"`
+	Sheets   []*Sheet `json:"sheet"`
 }
 
 type Sheet struct {
@@ -46,8 +46,8 @@ func (x *Xmind) AddSheet(sheetTitle string, rootTitle string) *Node {
 			NodeTitle: rootTitle,
 		},
 	}
-	x.Canvas = append(x.Canvas, canva)
-	return &x.Canvas[len(x.Canvas)-1].Node
+	x.Sheets = append(x.Sheets, canva)
+	return &x.Sheets[len(x.Sheets)-1].Node
 }
 
 // AddNode adds a new child node to the xmind,
@@ -76,7 +76,7 @@ func (x *Xmind) AddNodeBefore(node *Node, str string) (*Node, error) {
 		return nil, errors.New("node is nil")
 	}
 
-	for _, sheet := range x.Canvas {
+	for _, sheet := range x.Sheets {
 		parent := FindParent(&sheet.Node, node)
 		if parent != nil {
 			// In parent.Children find node and replace it with new parent node
@@ -116,7 +116,7 @@ func (x *Xmind) DeleteNode(node *Node) error {
 		return errors.New("node is nil")
 	}
 
-	for _, sheet := range x.Canvas {
+	for _, sheet := range x.Sheets {
 		parent := FindParent(&sheet.Node, node)
 		if parent != nil {
 			// In parent.Children find node and delete

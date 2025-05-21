@@ -22,10 +22,10 @@ func contentInit() *Content {
 // MarshalContent marshals an Xmind struct into a Content struct.
 func MarshalContent(xmind *Xmind) *Content {
 	content := contentInit()
-	for i := 0; i < len(xmind.Canvas); i++ {
+	for i := 0; i < len(xmind.Sheets); i++ {
 		newSheet := &XMLSheet{
-			Topic: convertNodeToTopic(&xmind.Canvas[i].Node),
-			Title: xmind.Canvas[i].SheetTitle,
+			Topic: convertNodeToTopic(&xmind.Sheets[i].Node),
+			Title: xmind.Sheets[i].SheetTitle,
 			Id:    RandStringRunes(26),
 			Theme: themeid,
 		}

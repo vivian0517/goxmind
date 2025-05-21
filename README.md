@@ -200,8 +200,14 @@ func main() {
 
     // Save the JSON structure
     xmind.SaveJson("save.txt")
+    // Delete node
+	  xmind.DeleteNode(xmind.Sheets[0].Node.Children[0])
+	  // Add node before node
+	  xmind.AddNodeBefore(xmind.Sheets[0].Node.Children[0], "new node before")
+	  xmind.Save("filename")
 }
 ```
+![changed XMind](./example/3.png)
 
 ## Contribution Guide
 If you wish to contribute to the `goxmind` project, please follow these steps:
