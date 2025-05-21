@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xmap-styles xmlns="urn:xmind:xmap:xmlns:style:2.0" xmlns:fo="http://www.w3.org/1999/XSL/Format"
+    xmlns:svg="http://www.w3.org/2000/svg" version="2.0">
+    <automatic-styles>
+        <style id="6ahvvorrus9crrv3fecqeg6cab" name="" type="topic">
+            <topic-properties border-line-color="#558ED5" border-line-width="3pt"
+                fo:font-family="Microsoft YaHei" line-class="org.xmind.branchConnection.curve"
+                line-color="#558ED5" line-width="1pt" />
+        </style>
+        <style id="36cm80bi913fbiakf3qupluqf2" name="" type="summary">
+            <summary-properties line-color="#C3D69B" line-width="5pt"
+                shape-class="org.xmind.summaryShape.square" />
+        </style>
+        <style id="2bsnqcv8li6d3laeb18i0v1q83" name="" type="boundary">
+            <boundary-properties fo:color="#FFFFFF" fo:font-family="Microsoft YaHei"
+                fo:font-size="10pt" fo:font-style="italic" line-color="#77933C" line-pattern="dot"
+                line-width="3pt" shape-class="org.xmind.boundaryShape.roundedRect"
+                svg:fill="#C3D69B" svg:opacity=".2" />
+        </style>
+        <style id="7mibhs9sfe6appna868g1h3osl" name="" type="topic">
+            <topic-properties border-line-color="#F1BD51" border-line-width="2pt"
+                fo:font-family="Microsoft YaHei" svg:fill="#FBF09C" />
+        </style>
+        <style id="41lafhps3u84hq1e6ng67nb5ep" name="" type="topic">
+            <topic-properties border-line-color="#558ED5" border-line-width="5pt" fo:color="#376092"
+                fo:font-family="Microsoft YaHei" line-class="org.xmind.branchConnection.curve"
+                line-color="#558ED5" line-width="1pt" shape-class="org.xmind.topicShape.roundedRect"
+                svg:fill="#DCE6F2" />
+        </style>
+        <style id="7hh1e6gmpnia9tmgknlotjvgps" name="" type="topic">
+            <topic-properties border-line-color="#558ED5" border-line-width="2pt" fo:color="#17375E"
+                fo:font-family="Microsoft YaHei" line-class="org.xmind.branchConnection.curve"
+                line-color="#558ED5" line-width="1pt" shape-class="org.xmind.topicShape.roundedRect"
+                svg:fill="#DCE6F2" />
+        </style>
+        <style id="6donvestvl0je4ec3qnptm3509" name="" type="topic">
+            <topic-properties border-line-width="0pt" fo:color="#FFFFFF"
+                fo:font-family="Microsoft YaHei" fo:font-size="10pt" fo:font-style="italic"
+                line-class="org.xmind.branchConnection.curve"
+                shape-class="org.xmind.topicShape.roundedRect" svg:fill="#77933C" />
+        </style>
+        <style id="7fq7eauldn9gn5does5s73taca" name="" type="topic">
+            <topic-properties border-line-width="0pt" fo:color="#FFFFFF"
+                fo:font-family="Microsoft YaHei" fo:font-weight="bold" line-color="#558ED5"
+                svg:fill="#558ED5" />
+        </style>
+        <style id="4t5vle8lrk51gibttd6odpmo0v" name="" type="relationship">
+            <relationship-properties arrow-end-class="org.xmind.arrowShape.triangle"
+                fo:color="#595959" fo:font-family="Microsoft YaHei" fo:font-size="10pt"
+                fo:font-style="italic" fo:font-weight="normal" fo:text-decoration="none"
+                line-color="#77933C" line-pattern="dash" line-width="3pt" />
+        </style>
+        <style id="6rivaq1srp6adf1qm0qeb5e14l" name="" type="map">
+            <map-properties color-gradient="none" line-tapered="none" multi-line-colors="none"
+                svg:fill="#FFFFFF" />
+        </style>
+    </automatic-styles>
+    <master-styles>
+        <style id="3t9ojddlutknqfparq91tnb3ls" name="专业" type="theme">
+            <theme-properties>
+                <default-style style-family="subTopic" style-id="6ahvvorrus9crrv3fecqeg6cab" />
+                <default-style style-family="summary" style-id="36cm80bi913fbiakf3qupluqf2" />
+                <default-style style-family="boundary" style-id="2bsnqcv8li6d3laeb18i0v1q83" />
+                <default-style style-family="calloutTopic" style-id="7mibhs9sfe6appna868g1h3osl" />
+                <default-style style-family="centralTopic" style-id="41lafhps3u84hq1e6ng67nb5ep" />
+                <default-style style-family="mainTopic" style-id="7hh1e6gmpnia9tmgknlotjvgps" />
+                <default-style style-family="summaryTopic" style-id="6donvestvl0je4ec3qnptm3509" />
+                <default-style style-family="floatingTopic" style-id="7fq7eauldn9gn5does5s73taca" />
+                <default-style style-family="relationship" style-id="4t5vle8lrk51gibttd6odpmo0v" />
+                <default-style style-family="map" style-id="6rivaq1srp6adf1qm0qeb5e14l" />
+            </theme-properties>
+        </style>
+    </master-styles>
+</xmap-styles>

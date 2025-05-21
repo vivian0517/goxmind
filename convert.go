@@ -27,6 +27,7 @@ func MarshalContent(xmind *Xmind) *Content {
 			Topic: convertNodeToTopic(&xmind.Canvas[i].Node),
 			Title: xmind.Canvas[i].SheetTitle,
 			Id:    RandStringRunes(26),
+			Theme: themeid,
 		}
 		content.XMLSheets = append(content.XMLSheets, newSheet)
 	}

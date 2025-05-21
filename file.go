@@ -2,6 +2,7 @@ package goxmind
 
 import (
 	"archive/zip"
+	_ "embed"
 	"encoding/json"
 	"encoding/xml"
 	"errors"
@@ -11,6 +12,10 @@ import (
 	"os"
 	"strings"
 )
+
+//go:embed styles/styles.xml
+var styles []byte
+var themeid = "3t9ojddlutknqfparq91tnb3ls"
 
 func createManifest() *Manifest {
 	return &Manifest{
@@ -70,7 +75,7 @@ func (xmind *Xmind) Save(filename string) error {
 	if err != nil {
 		return err
 	}
-	stylesFile.Write([]byte("<styles></styles>"))
+	stylesFile.Write(styles)
 	path, err := os.Getwd()
 	if err != nil {
 		return err
@@ -266,6 +271,7 @@ func convertNewJsonToXmind(newJson *NewJson) *Content {
 		sheet := &XMLSheet{
 			Title: mindMap.Title,
 			Id:    mindMap.ID,
+			Theme: themeid,
 		}
 
 		// Process root topic

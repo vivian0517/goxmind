@@ -25,6 +25,7 @@ type XMLSheet struct {
 	Topic Topic  `xml:"topic"`
 	Title string `xml:"title"`
 	Id    string `xml:"id,attr"`
+	Theme string `xml:"theme,attr"`
 }
 
 type Topic struct {
