@@ -36,31 +36,26 @@ func main() {
 	rootNode := xmind.AddSheet("Sheet title", "Root Node title")
 
 	// 添加子节点标题
-	child1 := rootNode.AddNode("Child 1") // 如果要在此节点增加图标超链接等需要保存返回值
-	// 给child1节点设置超链接
-	child1.AddHref("www.example.com")
+	child1 := rootNode.AddNode("Child 1") // 如果需要继续在该节点下添加子节点，需要保存返回值
+	rootNode.AddNode("Child 2")           // 如果不需要继续添加子节点，可以忽略返回值
+	rootNode.AddNode("Child 3")
+	rootNode.AddNode("Child 4")
 
-	child2 := rootNode.AddNode("Child 2")
-	// 给child2节点设置备注
-	child2.AddNotes("Notes")
+	// 继续在 child1 节点下添加子节点
+	child1_1 := child1.AddNode("Child 1.1") // 如果需要继续在该节点下添加子节点，需要保存返回值
+	child1_2 := child1.AddNode("Child 1.2")
+	child1.AddNode("Child 1.3") // 如果不需要继续添加子节点，可以忽略返回值
 
-	child3 := rootNode.AddNode("Child 3")
-	// 给child3节点设置图标 🔢 优先级
-	child3.AddMaker(goxmind.Priority1)
-	child3.AddMaker(goxmind.Priority2)
+	// 继续在 child1.1 节点下添加子节点
+	child1_1.AddNode("Child 1.1.1")
+	child1_1.AddNode("Child 1.1.2")
+	child1_2.AddNode("Child 1.2.1")
+	child1_2.AddNode("Child 1.2.2")
 
-	child4 := rootNode.AddNode("Child 4")
-	// 给child4节点设置图标 ⭐ 星星
-	child4.AddMaker(goxmind.StarRed)
-	// 给child4节点设置图标 😊 表情
-	child4.AddMaker(goxmind.SmileySmile)
-	// 给child4节点设置图标 ✅ 任务进度
-	child4.AddMaker(goxmind.Task0_8)
-	// 更多图标参考marker.go中MarkerId常量
-
-	// 保存xmind,".xmind"文件后缀可填也可不填
+	// 保存 xmind，".xmind" 后缀可选
 	xmind.Save("xmind_file_name")
 }
+
 
 ```
 
