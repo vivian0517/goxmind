@@ -53,7 +53,7 @@ func main() {
 	child1_2.AddNode("Child 1.2.2")
 
 	// Save xmind, the ".xmind" file suffix is optional
-	xmind.Save("xmind_file_name")
+  xmind.Save("xmind_file_name")
 }
 ```
 
