@@ -201,10 +201,10 @@ func convertTopicToNode(topic *Topic) Node {
 	}
 
 	// Extract icons (marker-id)
-	if topic.MakerRefs != nil && len(topic.MakerRefs.MakerRef) > 0 {
-		node.Makers = make([]Makers, len(topic.MakerRefs.MakerRef))
-		for i, makerRef := range topic.MakerRefs.MakerRef {
-			node.Makers[i] = Makers{Maker: makerRef.MakerId}
+	if topic.MarkerRefs != nil && len(topic.MarkerRefs.MarkerRef) > 0 {
+		node.Markers = make([]Marker, len(topic.MarkerRefs.MarkerRef))
+		for i, markerRef := range topic.MarkerRefs.MarkerRef {
+			node.Markers[i] = Marker{MarkerId: markerRef.MakerId}
 		}
 	}
 
@@ -275,44 +275,54 @@ func convertNewJsonToXmind(newJson *NewJson) *Content {
 		}
 
 		// Process root topic
-		rootTopic := mindMap.RootTopic
-		sheetTopic := Topic{
-			Id:             rootTopic.ID,
-			Title:          rootTopic.Title,
-			Structureclass: rootTopic.StructureClass,
-		}
-		// Process markers
-		if len(rootTopic.Markers) > 0 {
-			var makerref []MakerRef
-			for i := 0; i < len(rootTopic.Markers); i++ {
-				makerref = append(makerref, MakerRef{rootTopic.Markers[i].MarkerId})
-
-			}
-			sheetTopic.MakerRefs.MakerRef = makerref
+		if mindMap.RootTopic != nil {
+			sheetTopic := convertXMindTopicToTopic(mindMap.RootTopic)
+			sheet.Topic = sheetTopic
 		}
 
-		// Process child topics
-		if len(rootTopic.Childrennew.Attached) > 0 {
-			children := &Children{
-				Topics: Topics{
-					Type: "attached",
-				},
-			}
-
-			for _, attached := range rootTopic.Childrennew.Attached {
-				childTopic := Topic{
-					Id:    attached.ID,
-					Title: attached.Title,
-				}
-				children.Topics.Topic = append(children.Topics.Topic, childTopic)
-			}
-
-			sheetTopic.Children = children
-		}
-
-		sheet.Topic = sheetTopic
 		content.XMLSheets = append(content.XMLSheets, sheet)
 	}
 
 	return content
+}
+
+// convertXMindTopicToTopic converts an XMindTopic to a Topic
+func convertXMindTopicToTopic(xmindTopic *XMindTopic) Topic {
+	topic := Topic{
+		Id:             xmindTopic.ID,
+		Title:          xmindTopic.Title,
+		Structureclass: xmindTopic.StructureClass,
+	}
+
+	// Process markers
+	if len(xmindTopic.Markers) > 0 {
+		var makerref []MarkerRef
+		for _, marker := range xmindTopic.Markers {
+			makerref = append(makerref, MarkerRef{MakerId: marker.MarkerID})
+		}
+		topic.MarkerRefs = &MarkerRefs{MarkerRef: makerref}
+	}
+
+	// Process notes
+	if xmindTopic.Notes != nil && xmindTopic.Notes.Plain != nil {
+		topic.Notes = &Note{Plain: xmindTopic.Notes.Plain.Content}
+	}
+
+	// Process children recursively
+	if xmindTopic.Children != nil && len(xmindTopic.Children.Attached) > 0 {
+		children := &Children{
+			Topics: Topics{
+				Type: "attached",
+			},
+		}
+
+		for _, attached := range xmindTopic.Children.Attached {
+			childTopic := convertXMindTopicToTopic(attached)
+			children.Topics.Topic = append(children.Topics.Topic, childTopic)
+		}
+
+		topic.Children = children
+	}
+
+	return topic
 }
