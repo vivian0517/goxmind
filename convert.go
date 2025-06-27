@@ -55,12 +55,12 @@ func convertNodeToTopic(node *Node) Topic {
 	}
 
 	// Set icons
-	if len(node.Makers) > 0 {
-		topic.MakerRefs = &MakerRefs{
-			MakerRef: make([]MakerRef, len(node.Makers)),
+	if len(node.Markers) > 0 {
+		topic.MarkerRefs = &MarkerRefs{
+			MarkerRef: make([]MarkerRef, len(node.Markers)),
 		}
-		for i, maker := range node.Makers {
-			topic.MakerRefs.MakerRef[i] = MakerRef{MakerId: maker.Maker}
+		for i, marker := range node.Markers {
+			topic.MarkerRefs.MarkerRef[i] = MarkerRef{MakerId: marker.MarkerId}
 		}
 	}
 

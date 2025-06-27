@@ -29,14 +29,14 @@ type XMLSheet struct {
 }
 
 type Topic struct {
-	XMLName        xml.Name   `xml:"topic"`
-	Structureclass string     `xml:"structure-class,attr,omitempty"`
-	Id             string     `xml:"id,attr"`
-	Title          string     `xml:"title"`
-	Children       *Children  `xml:"children,omitempty"`
-	MakerRefs      *MakerRefs `xml:"marker-refs,omitempty"`
-	Notes          *Note      `xml:"notes,omitempty"`
-	Href           string     `xml:"xlink:href,attr,omitempty"`
+	XMLName        xml.Name    `xml:"topic"`
+	Structureclass string      `xml:"structure-class,attr,omitempty"`
+	Id             string      `xml:"id,attr"`
+	Title          string      `xml:"title"`
+	Children       *Children   `xml:"children,omitempty"`
+	MarkerRefs     *MarkerRefs `xml:"marker-refs,omitempty"`
+	Notes          *Note       `xml:"notes,omitempty"`
+	Href           string      `xml:"xlink:href,attr,omitempty"`
 }
 
 type Children struct {
@@ -49,11 +49,11 @@ type Topics struct {
 	Topic   []Topic  `xml:"topic"`
 }
 
-type MakerRefs struct {
-	MakerRef []MakerRef `xml:"marker-ref,omitempty"`
+type MarkerRefs struct {
+	MarkerRef []MarkerRef `xml:"marker-ref,omitempty"`
 }
 
-type MakerRef struct {
+type MarkerRef struct {
 	MakerId string `xml:"marker-id,attr,omitempty"`
 }
 
