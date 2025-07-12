@@ -16,6 +16,7 @@ import (
 //go:embed styles/styles.xml
 var styles []byte
 var themeid = "3t9ojddlutknqfparq91tnb3ls"
+var provider = "org.xmind.ui.map.unbalanced"
 
 func createManifest() *Manifest {
 	return &Manifest{

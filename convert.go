@@ -3,6 +3,7 @@ package goxmind
 
 import (
 	"math/rand"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -76,6 +77,17 @@ func convertNodeToTopic(node *Node) Topic {
 	}
 
 	if len(node.Children) > 0 {
+		//增加extensions
+		num := strconv.Itoa(len(node.Children))
+		topic.Extensions = &Extensions{
+			Extension: Extension{
+				Provider: provider,
+				Ext_content: Ext_content{
+					Right_number: num,
+				},
+			},
+		}
+
 		children := Children{
 			Topics: Topics{
 				Type:  "attached",

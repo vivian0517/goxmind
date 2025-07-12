@@ -29,14 +29,28 @@ type XMLSheet struct {
 }
 
 type Topic struct {
-	XMLName        xml.Name   `xml:"topic"`
-	Structureclass string     `xml:"structure-class,attr,omitempty"`
-	Id             string     `xml:"id,attr"`
-	Title          string     `xml:"title"`
-	Children       *Children  `xml:"children,omitempty"`
-	MakerRefs      *MakerRefs `xml:"marker-refs,omitempty"`
-	Notes          *Note      `xml:"notes,omitempty"`
-	Href           string     `xml:"xlink:href,attr,omitempty"`
+	XMLName        xml.Name    `xml:"topic"`
+	Structureclass string      `xml:"structure-class,attr,omitempty"`
+	Id             string      `xml:"id,attr"`
+	Title          string      `xml:"title"`
+	Children       *Children   `xml:"children,omitempty"`
+	Extensions     *Extensions `xml:"extensions,omitempty"`
+	MakerRefs      *MakerRefs  `xml:"marker-refs,omitempty"`
+	Notes          *Note       `xml:"notes,omitempty"`
+	Href           string      `xml:"xlink:href,attr,omitempty"`
+}
+
+type Extensions struct {
+	Extension Extension `xml:"extension"`
+}
+
+type Extension struct {
+	Provider    string      `xml:"provider,attr"`
+	Ext_content Ext_content `xml:"content"`
+}
+
+type Ext_content struct {
+	Right_number string `xml:"right-number"`
 }
 
 type Children struct {
