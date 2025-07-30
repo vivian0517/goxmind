@@ -93,16 +93,16 @@ func main() {
 
 	child3 := rootNode.AddNode("Child 3")
 	// 给child3节点设置图标 🔢 优先级
-	child3.AddMaker(goxmind.Priority1)
-	child3.AddMaker(goxmind.Priority2)
+	child3.AddMarker(goxmind.Priority1)
+	child3.AddMarker(goxmind.Priority2)
 
 	child4 := rootNode.AddNode("Child 4")
 	// 给child4节点设置图标 ⭐ 星星
-	child4.AddMaker(goxmind.StarRed)
+	child4.AddMarker(goxmind.StarRed)
 	// 给child4节点设置图标 😊 表情
-	child4.AddMaker(goxmind.SmileySmile)
+	child4.AddMarker(goxmind.SmileySmile)
 	// 给child4节点设置图标 ✅ 任务进度
-	child4.AddMaker(goxmind.Task0_8)
+	child4.AddMarker(goxmind.Task0_8)
 	// 更多图标参考marker.go中MarkerId常量
 
 	// 保存xmind,".xmind"文件后缀可填也可不填

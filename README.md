@@ -53,7 +53,7 @@ func main() {
 	child1_2.AddNode("Child 1.2.2")
 
 	// Save xmind, the ".xmind" file suffix is optional
-  xmind.Save("xmind_file_name")
+	xmind.Save("xmind_file_name")
 }
 ```
 
@@ -90,16 +90,16 @@ func main() {
 
 	child3 := rootNode.AddNode("Child 3")
 	// Set icon for child3 node 🔢 Priority
-	child3.AddMaker(goxmind.Priority1)
-	child3.AddMaker(goxmind.Priority2)
+	child3.AddMarker(goxmind.Priority1)
+	child3.AddMarker(goxmind.Priority2)
 
 	child4 := rootNode.AddNode("Child 4")
 	// Set icon for child4 node ⭐ Star
-	child4.AddMaker(goxmind.StarRed)
+	child4.AddMarker(goxmind.StarRed)
 	// Set icon for child4 node 😊 Smiley
-	child4.AddMaker(goxmind.SmileySmile)
+	child4.AddMarker(goxmind.SmileySmile)
 	// Set icon for child4 node ✅ Task Progress
-	child4.AddMaker(goxmind.Task0_8)
+	child4.AddMarker(goxmind.Task0_8)
 	// For more icons, refer to the MarkerId constant in marker.go
 
 	// Save xmind, the ".xmind" file suffix is optional
@@ -189,22 +189,22 @@ import (
 
 func main() {
 
-    // Load the specified XMind file, compatible with both old and new versions
-    xmind, err := goxmind.Load("xmind_file_name")
-    if err != nil {
-        fmt.Print("err:", err)
-    }
+	// Load the specified XMind file, compatible with both old and new versions
+	xmind, err := goxmind.Load("xmind_file_name")
+	if err != nil {
+	  fmt.Print("err:", err)
+	}
 
-    // Print the JSON structure
-    xmind.PrintJson()
+	// Print the JSON structure
+	xmind.PrintJson()
 
-    // Save the JSON structure
-    xmind.SaveJson("save.txt")
-    // Delete node
-	  xmind.DeleteNode(xmind.Sheets[0].Node.Children[0])
-	  // Add node before node
-	  xmind.AddNodeBefore(xmind.Sheets[0].Node.Children[0], "new node before")
-	  xmind.Save("filename")
+	// Save the JSON structure
+	xmind.SaveJson("save.txt")
+	// Delete node
+	xmind.DeleteNode(xmind.Sheets[0].Node.Children[0])
+	// Add node before node
+	xmind.AddNodeBefore(xmind.Sheets[0].Node.Children[0], "new node before")
+	xmind.Save("filename")
 }
 ```
 ![changed XMind](./example/3.png)

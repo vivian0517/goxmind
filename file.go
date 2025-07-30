@@ -202,10 +202,10 @@ func convertTopicToNode(topic *Topic) Node {
 	}
 
 	// Extract icons (marker-id)
-	if topic.MakerRefs != nil && len(topic.MakerRefs.MakerRef) > 0 {
-		node.Makers = make([]Makers, len(topic.MakerRefs.MakerRef))
-		for i, makerRef := range topic.MakerRefs.MakerRef {
-			node.Makers[i] = Makers{Maker: makerRef.MakerId}
+	if topic.MarkerRefs != nil && len(topic.MarkerRefs.MarkerRef) > 0 {
+		node.Markers = make([]Markers, len(topic.MarkerRefs.MarkerRef))
+		for i, markerRef := range topic.MarkerRefs.MarkerRef {
+			node.Markers[i] = Markers{Marker: markerRef.MarkerId}
 		}
 	}
 
@@ -284,12 +284,12 @@ func convertNewJsonToXmind(newJson *NewJson) *Content {
 		}
 		// Process markers
 		if len(rootTopic.Markers) > 0 {
-			var makerref []MakerRef
+			var markerref []MarkerRef
 			for i := 0; i < len(rootTopic.Markers); i++ {
-				makerref = append(makerref, MakerRef{rootTopic.Markers[i].MarkerId})
+				markerref = append(markerref, MarkerRef{rootTopic.Markers[i].MarkerId})
 
 			}
-			sheetTopic.MakerRefs.MakerRef = makerref
+			sheetTopic.MarkerRefs.MarkerRef = markerref
 		}
 
 		// Process child topics

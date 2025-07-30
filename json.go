@@ -15,15 +15,15 @@ type Sheet struct {
 }
 
 type Node struct {
-	NodeTitle string   `json:"nodeTitle"`
-	Children  []*Node  `json:"children,omitempty"`
-	Makers    []Makers `json:"makers,omitempty"`
-	Notes     string   `json:"notes,omitempty"`
-	Href      string   `json:"href,omitempty"`
+	NodeTitle string    `json:"nodeTitle"`
+	Children  []*Node   `json:"children,omitempty"`
+	Markers   []Markers `json:"markers,omitempty"`
+	Notes     string    `json:"notes,omitempty"`
+	Href      string    `json:"href,omitempty"`
 }
 
-type Makers struct {
-	Maker string `json:"maker,omitempty"`
+type Markers struct {
+	Marker string `json:"marker,omitempty"`
 }
 
 func New() *Xmind {
@@ -148,18 +148,18 @@ func (n *Node) UpdateNode(str string) {
 
 // Set icon
 func (x *Xmind) AddMarker(node *Node, marker MarkerId) {
-	markerVal := Makers{
-		Maker: string(marker),
+	markerVal := Markers{
+		Marker: string(marker),
 	}
-	node.Makers = append(node.Makers, markerVal)
+	node.Markers = append(node.Markers, markerVal)
 }
 
 // Set icon
-func (n *Node) AddMaker(marker MarkerId) {
-	markerVal := Makers{
-		Maker: string(marker),
+func (n *Node) AddMarker(marker MarkerId) {
+	markerVal := Markers{
+		Marker: string(marker),
 	}
-	n.Makers = append(n.Makers, markerVal)
+	n.Markers = append(n.Markers, markerVal)
 }
 
 // Set note

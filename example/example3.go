@@ -19,16 +19,16 @@ func example3() {
 
 	child3 := rootNode.AddNode("Child 3")
 	// Set icon for child3 node 🔢 Priority
-	child3.AddMaker(goxmind.Priority1)
-	child3.AddMaker(goxmind.Priority2)
+	child3.AddMarker(goxmind.Priority1)
+	child3.AddMarker(goxmind.Priority2)
 
 	child4 := rootNode.AddNode("Child 4")
 	// Set icon for child4 node ⭐ Star
-	child4.AddMaker(goxmind.StarRed)
+	child4.AddMarker(goxmind.StarRed)
 	// Set icon for child4 node 😊 Smiley
-	child4.AddMaker(goxmind.SmileySmile)
+	child4.AddMarker(goxmind.SmileySmile)
 	// Set icon for child4 node ✅ Task Progress
-	child4.AddMaker(goxmind.Task0_8)
+	child4.AddMarker(goxmind.Task0_8)
 	// For more icons, refer to the MarkerId constant in marker.go
 
 	// Save xmind, the ".xmind" file suffix is optional

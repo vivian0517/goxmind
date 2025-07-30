@@ -35,7 +35,7 @@ type Topic struct {
 	Title          string      `xml:"title"`
 	Children       *Children   `xml:"children,omitempty"`
 	Extensions     *Extensions `xml:"extensions,omitempty"`
-	MakerRefs      *MakerRefs  `xml:"marker-refs,omitempty"`
+	MarkerRefs     *MarkerRefs `xml:"marker-refs,omitempty"`
 	Notes          *Note       `xml:"notes,omitempty"`
 	Href           string      `xml:"xlink:href,attr,omitempty"`
 }
@@ -63,12 +63,12 @@ type Topics struct {
 	Topic   []Topic  `xml:"topic"`
 }
 
-type MakerRefs struct {
-	MakerRef []MakerRef `xml:"marker-ref,omitempty"`
+type MarkerRefs struct {
+	MarkerRef []MarkerRef `xml:"marker-ref,omitempty"`
 }
 
-type MakerRef struct {
-	MakerId string `xml:"marker-id,attr,omitempty"`
+type MarkerRef struct {
+	MarkerId string `xml:"marker-id,attr,omitempty"`
 }
 
 type Note struct {
